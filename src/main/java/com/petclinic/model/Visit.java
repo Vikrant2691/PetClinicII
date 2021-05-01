@@ -1,8 +1,13 @@
 package com.petclinic.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {

@@ -3,10 +3,14 @@ package com.petclinic.services.springdatajpa;
 import com.petclinic.model.Owner;
 import com.petclinic.repositories.OwnerRepository;
 import com.petclinic.services.OwnerService;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.HashSet;
 import java.util.Set;
 
+@Service
+@Primary
 public class OwnerSDJPA implements OwnerService {
 
     private final OwnerRepository ownerRepository;
@@ -23,7 +27,10 @@ public class OwnerSDJPA implements OwnerService {
 
     @Override
     public Set<Owner> findAll() {
-        return (Set<Owner>) ownerRepository.findAll();
+
+        Set<Owner> owners= new HashSet<>();
+        ownerRepository.findAll().forEach(owners::add);
+        return owners;
     }
 
     @Override

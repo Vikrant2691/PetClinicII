@@ -3,9 +3,15 @@ package com.petclinic.services.springdatajpa;
 import com.petclinic.model.Vet;
 import com.petclinic.repositories.VetRepository;
 import com.petclinic.services.VetService;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
+@Service
+@Primary
 public class VetSDJPA implements VetService {
 
     private final VetRepository vetRepository;
@@ -16,7 +22,10 @@ public class VetSDJPA implements VetService {
 
     @Override
     public Set<Vet> findAll() {
-        return (Set<Vet>) vetRepository.findAll();
+
+        Set<Vet> vets = new HashSet<>();
+        vetRepository.findAll().forEach(vets::add);
+        return vets;
     }
 
     @Override
